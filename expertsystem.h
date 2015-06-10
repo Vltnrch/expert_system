@@ -6,7 +6,7 @@
 /*   By: vroche <vroche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/03 15:15:04 by hleber            #+#    #+#             */
-/*   Updated: 2015/06/09 17:56:41 by vroche           ###   ########.fr       */
+/*   Updated: 2015/06/10 17:30:45 by vroche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct	s_facts
 {
 	char		name;
 	int			status;
+	int			insearch;
 }				t_facts;
 
 typedef struct	s_env
@@ -73,6 +74,8 @@ void			ft_add_facts(t_env *env, char name, int status);
 int				ft_fact_isexist(t_env *env, char name);
 int				ft_getstatus_fact(t_env *env, char name);
 void			ft_changestatus_fact(t_env *env, char name, int status);
+int				ft_fact_isinsearch(t_env *env, char name);
+void			ft_changeinsearch_fact(t_env *env, char name, int insearch);
 
 void			ft_backward_chaining(t_env *env);
 int				ft_engine(t_env *env, char name);

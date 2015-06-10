@@ -6,7 +6,7 @@
 /*   By: vroche <vroche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/04 17:21:40 by vroche            #+#    #+#             */
-/*   Updated: 2015/06/10 15:11:35 by vroche           ###   ########.fr       */
+/*   Updated: 2015/06/10 17:34:35 by vroche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,10 +153,13 @@ int		ft_engine(t_env *env, char name)
 	int		reverse;
 
 	status = UNDETER;
+	if (ft_fact_isinsearch(env, name))
+		return (UNDETER);
 	if ((status = ft_getstatus_fact(env, name)) != DETER)
 		return (status);
 	else
 	{
+		ft_changeinsearch_fact(env, name, 1);
 		lrules = env->lrules;
 		while (lrules)
 		{
@@ -174,11 +177,13 @@ int		ft_engine(t_env *env, char name)
 					if (reverse == 1)
 						status = !status;
 					ft_changestatus_fact(env, name, status);
+					ft_changeinsearch_fact(env, name, 0);
 					return(status);
 				}
 			}
 			lrules = lrules->next;
 		}
+		ft_changeinsearch_fact(env, name, 0);
 	}
 	return (status);
 }
