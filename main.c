@@ -6,7 +6,7 @@
 /*   By: vroche <vroche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/03 15:13:03 by hleber            #+#    #+#             */
-/*   Updated: 2015/06/10 14:56:21 by vroche           ###   ########.fr       */
+/*   Updated: 2015/06/10 17:12:07 by hleber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,100 @@ void		ft_createlist_facts(t_env *env)
 		}
 		lrules = lrules->next;
 	}
+}
 
+float		add_ascii(char *s1)
+{
+	int len;
+	int len2;
+	
+	len = 0;
+	len2 = 1;
+	while (*s1)
+	{
+		if ((*s1 >= 'A' && *s1 <= 'Z') || *s1 == '^' || *s1 == '|' || *s1 == '+')
+		{
+			len += (int)*s1;
+			len2 += len * (int)*s1;
+		}
+		s1++;
+	}
+	return (len / (float)len2);
+}
+
+int		ft_check_char(char *s1, char *s2)
+{
+	while (*s1)
+	{
+		if (*s1 >= 'A' && *s1 <= 'Z')
+			if (ft_strchr(s2, *s1) != NULL)
+				return (0);
+		s1++;
+	}
+	return (1);
+}
+
+int			check_same_char(t_env *env)
+{
+	t_rules     *rule;
+    t_list      *lrules;
+	char		*tmp;
+	lrules = env->lrules;
+    while (lrules)
+    {
+		rule = lrules->content;
+		tmp = rule->before;
+		while (*tmp)
+		{
+			if (*tmp >= 'A' && *tmp <= 'Z')
+				if (ft_strchr(tmp + 1, *tmp) != NULL)
+					return (0);
+			tmp++;
+		}
+		tmp = rule->after;
+		while (*tmp)
+		{
+            if (*tmp >= 'A' && *tmp <= 'Z')
+				if (ft_strchr(tmp + 1, *tmp) != NULL)
+					return (0);
+            tmp++;
+        }
+		lrules = lrules->next;
+	}
+	return (1);
+}
+
+int			ft_check_no_multi_rules(t_env *env)
+{
+	t_rules		*rule;
+	t_rules		*rule2;
+	t_list      *lrules;
+	t_list		*lrules2;
+	float		len;
+
+	lrules = env->lrules;
+	while (lrules)
+	{
+		rule = lrules->content;
+		len = add_ascii(rule->before);
+		lrules2 = env->lrules;
+		while (lrules2)
+		{
+			rule2 = lrules2->content;
+			if (len == add_ascii(rule2->before))
+			{
+				if ((rule != rule2) && ((add_ascii(rule->after) == add_ascii(rule2->after)) ||
+				ft_check_char(rule->after, rule2->after) == 0))
+				{
+					printf("%s, %s\n", rule->after, rule2->after);
+					return (0);
+				}
+			}
+			lrules2 = lrules2->next;
+		}
+		lrules = lrules->next;
+	}
+	return (1);
 }
 
 void		ft_init_facts(t_env *env)
@@ -148,6 +241,8 @@ void		parse_arg(t_env *env, int ac, char **av)
 		ft_perror_exit("Where is the question ?! (?...):");
 	if (env->lrules == NULL)
 		ft_perror_exit("Where is the rules ?!:");
+	if ((ft_check_no_multi_rules(env) == 0) || (check_same_char(env) == 0))
+		ft_perror_exit("Rules:");
 	ft_createlist_facts(env);
 	ft_init_facts(env);
 	lfacts = env->lfacts;
