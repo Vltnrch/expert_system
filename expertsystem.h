@@ -6,7 +6,7 @@
 /*   By: vroche <vroche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/03 15:15:04 by hleber            #+#    #+#             */
-/*   Updated: 2015/06/10 17:30:45 by vroche           ###   ########.fr       */
+/*   Updated: 2015/06/10 19:06:32 by vroche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,9 @@ void			ft_changeinsearch_fact(t_env *env, char name, int insearch);
 
 void			ft_backward_chaining(t_env *env);
 int				ft_engine(t_env *env, char name);
+
+int				ft_ultimate_check(t_env *env);
+
+int				ft_check_char(char *s1, char *s2);
 
 #endif
