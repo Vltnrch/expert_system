@@ -1,0 +1,9 @@
+A + D => C			# R1 if A and D then C
+B => C	 			# R2 if B then C
+D | C => F			# R3 if D or C then F
+F + E => G			# R4 if F and E then G
+F + A => E			# R5 if F and A then E
+
+=AB
+
+?G

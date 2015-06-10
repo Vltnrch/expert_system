@@ -1,0 +1,12 @@
+!A	=>B		#R1 : (!A alorsB) alorsP
+B =>P
+P + Q =>F		#R2 : (P et Q) alorsF
+C=>	A		#R3 : (C alorsA) alorsQ
+A => Q
+F => D		#R4 : F alors(D alorsK)
+D => K
+K => M + L		#R5 : K alors(M et L)
+
+=AD
+
+?M

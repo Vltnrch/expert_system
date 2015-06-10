@@ -1,0 +1,10 @@
+E + B => C	#R1 : Si E et B alors C
+B + D => A	#R2 : Si B et D alors A
+J + H => B	#R3 : Si J et H alors B
+D + E => B	#R4 : Si D et E alors B
+B + D => F	#R5 : Si B et D alors F
+E + F => D	#R6 : Si E et F alors D
+
+=EF
+
+?C			#Reponse : TRUE

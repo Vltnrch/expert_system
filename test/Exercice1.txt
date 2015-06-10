@@ -1,0 +1,13 @@
+B + D + E => F		# R1 : Si B et D et E alors F
+G + D => A			# R2 : Si G et D alors A
+C + F => A			# R3 : Si C et F alors A
+B => X				# R4 : Si B alors X
+D => E				# R5 : Si D alors E
+X + A => H			# R6 : Si X et A alors H
+C =>D				# R7 : Si C alors D
+X + C => A			# R8 : Si X et C alors A
+X + B => D			# R9 : Si X et B alors D
+
+=BC
+
+?H					# Reponse : TRUE
