@@ -6,7 +6,7 @@
 /*   By: vroche <vroche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/03 15:13:03 by hleber            #+#    #+#             */
-/*   Updated: 2015/06/10 17:12:07 by hleber           ###   ########.fr       */
+/*   Updated: 2015/06/10 18:35:36 by hleber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,28 @@ int			ft_check_no_multi_rules(t_env *env)
 		}
 		lrules = lrules->next;
 	}
+	lrules = env->lrules;
+	while (lrules)
+    {
+        rule = lrules->content;
+        len = add_ascii(rule->after);
+        lrules2 = env->lrules;
+        while (lrules2)
+        {
+            rule2 = lrules2->content;
+            if (len == add_ascii(rule2->after))
+            {
+                if ((rule != rule2) && ((add_ascii(rule->before) == add_ascii(rule2->before)) ||
+										ft_check_char(rule->before, rule2->before) == 0))
+                {
+                    printf("%s, %s\n", rule->before, rule2->before);
+                    return (0);
+                }
+            }
+            lrules2 = lrules2->next;
+        }
+        lrules = lrules->next;
+    }
 	return (1);
 }
 
