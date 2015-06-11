@@ -6,7 +6,7 @@
 /*   By: vroche <vroche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/03 15:13:03 by hleber            #+#    #+#             */
-/*   Updated: 2015/06/11 18:11:54 by vroche           ###   ########.fr       */
+/*   Updated: 2015/06/11 18:39:37 by vroche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ int			main(int ac, char **av)
 	if (close(fd) == -1)
 		ft_perror_exit("Close File:");
 	ft_backward_chaining(&env);
-	ft_printf("\n\033[1;34;40mSo %s is \033[0m", env.questions);
+	ft_printf("\n\033[1;34;40mSo the question %s is \033[0m", env.questions);
 	if (env.finish == FALSE)
 		ft_printf("\033[1;31;40mFalse\033[0m\n");
 	else if (env.finish == TRUE)
