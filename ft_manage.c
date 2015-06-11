@@ -6,7 +6,7 @@
 /*   By: vroche <vroche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/11 14:03:21 by vroche            #+#    #+#             */
-/*   Updated: 2015/06/11 16:10:19 by vroche           ###   ########.fr       */
+/*   Updated: 2015/06/11 16:12:41 by vroche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,14 @@ void		ft_cut_rules(t_env *env, t_expsys *exsy)
 	tmp = exsy->str;
 	while (*tmp && *tmp++ != '=')
 		len++;
-	before = (char *)malloc((len + 1) * sizeof(char));
+	before = ft_strnew(len);
 	before = ft_strncpy(before, exsy->str, len);
-	before[len] = 0;
 	exsy->str += len + 2;
 	tmp = exsy->str;
 	while (*tmp++)
 		len++;
-	after = (char *)malloc((len + 1) * sizeof(char));
+	after = ft_strnew(len);
 	after = ft_strncpy(after, exsy->str, len);
-	after[len] = 0;
 	ft_add_rules(env, before, after);
 }
 
