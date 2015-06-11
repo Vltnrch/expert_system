@@ -6,7 +6,7 @@
 /*   By: vroche <vroche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/06 18:46:12 by hleber            #+#    #+#             */
-/*   Updated: 2015/06/10 14:31:48 by vroche           ###   ########.fr       */
+/*   Updated: 2015/06/11 14:39:10 by vroche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,19 @@ int check_par(t_expsys *exsy)
 	return (flag);
 }
 
-int check_question(t_expsys *exsy, int i)
+static int check_question(t_expsys *exsy, int i)
 {
 	if (exsy->str[i] == '?')
 	{
 		i += 1;
 		while (exsy->str[i])
 		{
-			if ((exsy->str[i] < 'A' || exsy->str[i] > 'Z') && exsy->str[i] != '!')
+			if ((exsy->str[i] < 'A' || exsy->str[i] > 'Z') \
+				&& exsy->str[i] != '!')
 				return (0);
 			else if (exsy->str[i] == '!')
 			{
-				if (exsy->str[i + 1] < 'A'|| exsy->str[i + 1] > 'Z')
+				if (exsy->str[i + 1] < 'A' || exsy->str[i + 1] > 'Z')
 					return (0);
 			}
 			i++;
@@ -65,17 +66,37 @@ int check_facts(t_expsys *exsy, int i)
 	if (exsy->str[i] == '?')
 	{
 		if (check_question(exsy, i) == 0)
-			 return (0);
-			}
+			return (0);
+	}
 	return (1);
 }
 
 int check_point(t_expsys *exsy, int i)
 {
-	if (exsy->str[i - 1] != '+' && exsy->str[i - 1] != '^' &&
-	exsy->str[i - 1] != '|' && exsy->str[i - 1] != '>' && exsy->str[i - 1] != '(' && i >= 1)
+	if (exsy->str[i - 1] != '+' && exsy->str[i - 1] != '^' \
+		&& exsy->str[i - 1] != '|' && exsy->str[i - 1] != '>' \
+		&& exsy->str[i - 1] != '(' && i >= 1)
 		return (0);
-	else if ((exsy->str[i + 1] < 'A' || exsy->str[i + 1] > 'Z') && exsy->str[i + 1] != '(')
+	else if ((exsy->str[i + 1] < 'A' || exsy->str[i + 1] > 'Z') \
+				&& exsy->str[i + 1] != '(')
 		return (0);
+	return (1);
+}
+
+int valid_file(t_expsys *exsy)
+{
+	int i;
+
+	i = 0;
+	while (exsy->str[i])
+	{
+		if ((exsy->str[i] < 'A' || exsy->str[i] > 'Z') && exsy->str[i] !=
+		'(' && exsy->str[i] != '!' &&
+		exsy->str[i] != '=' && exsy->str[i] != '?' && exsy->str[i] != '\0' &&
+		exsy->str[i] != ')' && exsy->str[i] != '>' && exsy->str[i] != '|' &&
+		exsy->str[i] != '+' && exsy->str[i] != '^')
+			return (0);
+		i++;
+	}
 	return (1);
 }

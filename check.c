@@ -6,7 +6,7 @@
 /*   By: vroche <vroche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/06 18:44:07 by hleber            #+#    #+#             */
-/*   Updated: 2015/06/09 18:48:16 by vroche           ###   ########.fr       */
+/*   Updated: 2015/06/11 12:37:42 by vroche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,10 @@ int check_equal(t_expsys *exsy, int i)
 
 int check_imp(t_expsys *exsy, int i)
 {
-	if (i >= 1 && exsy->str[i - 1] != '=')
+	if (i >= 1 && exsy->str[i++ - 1] != '=')
 		return (0);
-	else 
+	else
 	{
-		i++;
 		while (exsy->str[i])
 		{
 			if ((exsy->str[i] < 'A' || exsy->str[i] > 'Z') &&
@@ -74,9 +73,8 @@ int check_imp(t_expsys *exsy, int i)
 				if (check_operator(exsy, i) == 0)
 					return (0);
 			}
-			else
-				if (check_operand(exsy, i) == 0)
-					return (0);
+			else if (check_operand(exsy, i) == 0)
+				return (0);
 			i++;
 		}
 	}

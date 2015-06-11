@@ -13,13 +13,18 @@
 NAME = expertsystem
 
 SRCS = check.c \
-		check2.c \
-		check_file.c \
-		check_rules.c \
-		del_space.c \
-		ft_list.c \
-		main.c \
-		ft_engine.c
+	check2.c \
+	check3.c \
+	check_multi_rules.c \
+	check_rules.c \
+	del_space.c \
+	ft_calc.c \
+	ft_engine.c \
+	ft_list.c \
+	ft_list2.c \
+	ft_manage.c \
+	ft_manage_calc.c \
+	main.c
 
 OBJS = $(SRCS:.c=.o)
 
