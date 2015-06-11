@@ -12,7 +12,7 @@
 
 #include "expertsystem.h"
 
-int 		check_par(t_expsys *exsy)
+int			check_par(t_expsys *exsy)
 {
 	int flag;
 	int i;
@@ -30,7 +30,7 @@ int 		check_par(t_expsys *exsy)
 	return (flag);
 }
 
-static int check_question(t_expsys *exsy, int i)
+static int	check_question(t_expsys *exsy, int i)
 {
 	if (exsy->str[i] == '?')
 	{
@@ -51,7 +51,7 @@ static int check_question(t_expsys *exsy, int i)
 	return (1);
 }
 
-int 		check_facts(t_expsys *exsy, int i)
+int			check_facts(t_expsys *exsy, int i)
 {
 	if (exsy->str[i] == '=')
 	{
@@ -71,7 +71,7 @@ int 		check_facts(t_expsys *exsy, int i)
 	return (1);
 }
 
-int 		check_point(t_expsys *exsy, int i)
+int			check_point(t_expsys *exsy, int i)
 {
 	if (exsy->str[i - 1] != '+' && exsy->str[i - 1] != '^' \
 		&& exsy->str[i - 1] != '|' && exsy->str[i - 1] != '>' \
@@ -83,7 +83,7 @@ int 		check_point(t_expsys *exsy, int i)
 	return (1);
 }
 
-int valid_file(t_expsys *exsy)
+int			valid_file(t_expsys *exsy)
 {
 	int i;
 

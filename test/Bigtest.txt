@@ -1,0 +1,17 @@
+Z							=> K			# R1  step    3
+!L + Z  					=> I 			# R2  unused
+Z  	 						=> T			# R3  unused
+!Z + !K 					=> C			# R4  step   2
+N + A 						=> H			# R5  unused
+(B ^ R) 					=> E			# R6  step          9
+(!Z ^ K) 					=> N			# R7  step       6
+!C 	  						=> O			# R9  step      5
+K  							=> O			# R10 unused
+(Z ^ C) + K					=> B			# R11 step  1
+O + K + N  	  		  		=> R			# R12 step     4
+(!R ^ Z) 					=> Y			# R13 step        7
+((R ^ E) + (!B ^ Z)) 		=> A			# R14 step         8
+
+=Z
+
+?BRYAN

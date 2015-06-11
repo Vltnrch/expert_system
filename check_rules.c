@@ -6,7 +6,7 @@
 /*   By: vroche <vroche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/08 15:10:56 by hleber            #+#    #+#             */
-/*   Updated: 2015/06/11 12:35:36 by vroche           ###   ########.fr       */
+/*   Updated: 2015/06/11 16:37:52 by hleber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 static int	valid_rules_part(t_expsys *exsy, int i)
 {
+	int flag;
+
+	flag = 0;
 	while (exsy->str[i])
 	{
 		if (exsy->str[i] == '|' || exsy->str[i] == '^' || exsy->str[i] == '+')
@@ -29,9 +32,11 @@ static int	valid_rules_part(t_expsys *exsy, int i)
 		}
 		else if (valid_rules2(exsy, i) == 0)
 			return (0);
+		if (exsy->str[i] == '=')
+			flag = 1;
 		i++;
 	}
-	return (1);
+	return (flag);
 }
 
 int			valid_rules(t_expsys *exsy)
@@ -44,6 +49,8 @@ int			valid_rules(t_expsys *exsy)
 		if (check_facts(exsy, i) == 0)
 			return (0);
 	}
+	else if (exsy->str[i] == 0)
+		return (1);
 	else
 	{
 		if (valid_rules_part(exsy, i) == 0)
