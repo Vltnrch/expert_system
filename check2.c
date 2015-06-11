@@ -6,13 +6,13 @@
 /*   By: vroche <vroche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/06 18:46:12 by hleber            #+#    #+#             */
-/*   Updated: 2015/06/11 14:39:10 by vroche           ###   ########.fr       */
+/*   Updated: 2015/06/11 14:44:50 by vroche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expertsystem.h"
 
-int check_par(t_expsys *exsy)
+int 		check_par(t_expsys *exsy)
 {
 	int flag;
 	int i;
@@ -51,7 +51,7 @@ static int check_question(t_expsys *exsy, int i)
 	return (1);
 }
 
-int check_facts(t_expsys *exsy, int i)
+int 		check_facts(t_expsys *exsy, int i)
 {
 	if (exsy->str[i] == '=')
 	{
@@ -71,7 +71,7 @@ int check_facts(t_expsys *exsy, int i)
 	return (1);
 }
 
-int check_point(t_expsys *exsy, int i)
+int 		check_point(t_expsys *exsy, int i)
 {
 	if (exsy->str[i - 1] != '+' && exsy->str[i - 1] != '^' \
 		&& exsy->str[i - 1] != '|' && exsy->str[i - 1] != '>' \
