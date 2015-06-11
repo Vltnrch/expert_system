@@ -6,7 +6,7 @@
 /*   By: vroche <vroche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/03 15:13:03 by hleber            #+#    #+#             */
-/*   Updated: 2015/06/11 14:37:40 by vroche           ###   ########.fr       */
+/*   Updated: 2015/06/11 17:42:38 by vroche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,33 @@ static void	parse_arg(t_env *env, int fd)
 	ft_init_facts(env);
 }
 
+static void	ft_display_initfacts(t_env *env)
+{
+	t_list	*lfacts;
+	t_facts	*fact;
+
+	lfacts = env->lfacts;
+	ft_printf("Initials facts :\n");
+	while (lfacts != NULL)
+	{
+		fact = lfacts->content;
+		ft_printf("\033[1;34;40m%c\033[0m is ", fact->name);
+		if (fact->status == FALSE)
+			ft_printf("\033[1;31;40mFalse\033[0m\n");
+		else if (fact->status == TRUE)
+			ft_printf("\033[1;32;40mTrue\033[0m\n");
+		else if (fact->status == UNDETER)
+			ft_printf("\033[1;37;41mUndeterminable\033[0m\n");
+		else if (fact->status == DETER)
+			ft_printf("\033[1;33;40mDeterminable\033[0m\n");
+		lfacts = lfacts->next;
+	}
+}
+
 int			main(int ac, char **av)
 {
 	t_env	env;
 	int		fd;
-	t_facts	*fact;
-	t_list	*lfacts;
 
 	if (ac != 2)
 	{
@@ -88,14 +109,8 @@ int			main(int ac, char **av)
 		ft_perror_exit("Open File:");
 	ft_init_env(&env);
 	parse_arg(&env, fd);
-	lfacts = env.lfacts;
-	while (lfacts != NULL)
-	{
-		fact = lfacts->content;
-		printf("Name : %c || Status : %d\n", fact->name, fact->status);
-		lfacts = lfacts->next;
-	}
-	printf("Question : %s\n", env.questions);
+	ft_display_initfacts(&env);
+	ft_printf("\nQuestion : %s\n\n", env.questions);
 	if (close(fd) == -1)
 		ft_perror_exit("Close File:");
 	ft_backward_chaining(&env);

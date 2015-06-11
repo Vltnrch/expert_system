@@ -6,7 +6,7 @@
 /*   By: vroche <vroche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/03 15:15:04 by hleber            #+#    #+#             */
-/*   Updated: 2015/06/11 14:42:52 by vroche           ###   ########.fr       */
+/*   Updated: 2015/06/11 16:59:13 by vroche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@
 # define TRUE 1
 # define UNDETER 2
 # define DETER 3
-
-# include <stdio.h>
 
 typedef struct	s_rules
 {

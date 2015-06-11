@@ -6,7 +6,7 @@
 /*   By: vroche <vroche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/03 12:20:59 by vroche            #+#    #+#             */
-/*   Updated: 2015/06/11 15:50:18 by vroche           ###   ########.fr       */
+/*   Updated: 2015/06/11 17:00:17 by vroche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <sys/types.h>
 # include <sys/uio.h>
+# include "ft_printf.h"
 
 # define BUFF_SIZE 512
 # define EOF (-1)

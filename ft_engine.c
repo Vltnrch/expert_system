@@ -6,13 +6,14 @@
 /*   By: vroche <vroche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/04 17:21:40 by vroche            #+#    #+#             */
-/*   Updated: 2015/06/11 13:53:36 by vroche           ###   ########.fr       */
+/*   Updated: 2015/06/11 17:42:54 by vroche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expertsystem.h"
 
-static int	ft_engine_part(t_env *env, char *calcr, t_rules *rule, t_calc *work)
+static int	ft_engine_part2(t_env *env, char *calcr, \
+							t_rules *rule, t_calc *work)
 {
 	int		status;
 	int		reverse;
@@ -36,7 +37,7 @@ static int	ft_engine_part(t_env *env, char *calcr, t_rules *rule, t_calc *work)
 	return (-1);
 }
 
-static int	ft_engine_part2(t_env *env, char name)
+static int	ft_engine_part(t_env *env, char name)
 {
 	int		rtn;
 	t_list	*lrules;
@@ -49,7 +50,7 @@ static int	ft_engine_part2(t_env *env, char name)
 		if ((calc_rule = \
 			ft_strchr(((t_rules *)(lrules->content))->after, name)))
 		{
-			if ((rtn = ft_engine_part(env, calc_rule, \
+			if ((rtn = ft_engine_part2(env, calc_rule, \
 									lrules->content, &work)) != -1)
 			{
 				ft_changestatus_fact(env, name, rtn);
@@ -67,17 +68,32 @@ int			ft_engine(t_env *env, char name)
 	int		rtn;
 
 	if (ft_fact_isinsearch(env, name))
+	{
 		return (UNDETER);
+	}
 	if ((status = ft_getstatus_fact(env, name)) != DETER)
+	{
 		return (status);
+	}
 	ft_changeinsearch_fact(env, name, 1);
-	if ((rtn = ft_engine_part2(env, name)) != -1)
+	if ((rtn = ft_engine_part(env, name)) != -1)
 	{
 		ft_changeinsearch_fact(env, name, 0);
 		return (rtn);
 	}
 	ft_changeinsearch_fact(env, name, 0);
 	return (UNDETER);
+}
+
+static void	ft_display_question(int result, char question)
+{
+	ft_printf("\033[1;34;40m%c\033[0m is ", question);
+	if (result == FALSE)
+		ft_printf("\033[1;31;40mFalse\033[0m\n");
+	else if (result == TRUE)
+		ft_printf("\033[1;32;40mTrue\033[0m\n");
+	else if (result == UNDETER)
+		ft_printf("\033[1;37;41mUndeterminable\033[0m\n");
 }
 
 void		ft_backward_chaining(t_env *env)
@@ -99,7 +115,7 @@ void		ft_backward_chaining(t_env *env)
 		result = ft_engine(env, *questions);
 		if (reverse == 1 && result != UNDETER)
 			result = !result;
-		printf("Resultat de %c : %d\n", *questions, result);
+		ft_display_question(result, *questions);
 		questions++;
 	}
 }
