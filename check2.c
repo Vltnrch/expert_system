@@ -6,7 +6,7 @@
 /*   By: vroche <vroche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/06 18:46:12 by hleber            #+#    #+#             */
-/*   Updated: 2015/06/11 14:44:50 by vroche           ###   ########.fr       */
+/*   Updated: 2015/06/11 17:50:30 by hleber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ int			check_facts(t_expsys *exsy, int i)
 		i += 1;
 		while (exsy->str[i])
 		{
-			if (exsy->str[i] < 'A' || exsy->str[i] > 'Z')
+			if ((exsy->str[i] < 'A' || exsy->str[i] > 'Z') &&
+			exsy->str[i] != '!')
 				return (0);
 			i++;
 		}
