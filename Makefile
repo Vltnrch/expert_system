@@ -30,7 +30,7 @@ OBJS = $(SRCS:.c=.o)
 
 LIB = -L libft/ -lft
 
-CFLAGS = -Wall -Wextra -Werror -I libft
+CFLAGS = -Wall -Wextra -Werror -I libft/includes
 
 CC = gcc
 
