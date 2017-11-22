@@ -6,7 +6,7 @@
 /*   By: vroche <vroche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/04 17:21:40 by vroche            #+#    #+#             */
-/*   Updated: 2015/06/11 17:42:54 by vroche           ###   ########.fr       */
+/*   Updated: 2015/06/11 18:13:01 by vroche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,15 +85,25 @@ int			ft_engine(t_env *env, char name)
 	return (UNDETER);
 }
 
-static void	ft_display_question(int result, char question)
+static void	ft_display_question(t_env *env, int result, \
+							char question, int reverse)
 {
+	if (reverse == 1)
+		ft_printf("\033[1;34;40m!\033[0m");
 	ft_printf("\033[1;34;40m%c\033[0m is ", question);
 	if (result == FALSE)
+	{
+		if (env->finish != UNDETER)
+			env->finish = FALSE;
 		ft_printf("\033[1;31;40mFalse\033[0m\n");
+	}
 	else if (result == TRUE)
 		ft_printf("\033[1;32;40mTrue\033[0m\n");
 	else if (result == UNDETER)
+	{
+		env->finish = UNDETER;
 		ft_printf("\033[1;37;41mUndeterminable\033[0m\n");
+	}
 }
 
 void		ft_backward_chaining(t_env *env)
@@ -104,7 +114,7 @@ void		ft_backward_chaining(t_env *env)
 
 	result = TRUE;
 	questions = env->questions;
-	while (*questions)
+	while (*questions && (result = TRUE))
 	{
 		reverse = 0;
 		if (*questions == '!')
@@ -115,7 +125,7 @@ void		ft_backward_chaining(t_env *env)
 		result = ft_engine(env, *questions);
 		if (reverse == 1 && result != UNDETER)
 			result = !result;
-		ft_display_question(result, *questions);
+		ft_display_question(env, result, *questions, reverse);
 		questions++;
 	}
 }

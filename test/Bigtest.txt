@@ -12,6 +12,6 @@ O + K + N  	  		  		=> R			# R12 step     4
 (!R ^ Z) 					=> Y			# R13 step        7
 ((R ^ E) + (!B ^ Z)) 		=> A			# R14 step         8
 
-=Z!E
+=!Z
 
-?BRYA!N
+?BRYANL

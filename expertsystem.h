@@ -6,7 +6,7 @@
 /*   By: vroche <vroche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/03 15:15:04 by hleber            #+#    #+#             */
-/*   Updated: 2015/06/11 16:59:13 by vroche           ###   ########.fr       */
+/*   Updated: 2015/06/11 18:08:29 by vroche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct	s_env
 	char		*questions;
 	char		*initfacts;
 	t_calc		*work;
+	int			finish;
 }				t_env;
 
 int				check_operator(t_expsys *exsy, int i);

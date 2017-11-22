@@ -6,7 +6,7 @@
 /*   By: vroche <vroche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/11 14:03:21 by vroche            #+#    #+#             */
-/*   Updated: 2015/06/11 16:12:41 by vroche           ###   ########.fr       */
+/*   Updated: 2015/06/11 17:53:58 by vroche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,17 +75,25 @@ void		ft_createlist_facts(t_env *env)
 void		ft_init_facts(t_env *env)
 {
 	char	*tmp;
+	int		reverse;
 
 	tmp = env->initfacts;
+	reverse = 0;
 	while (*tmp)
 	{
+		if (*tmp == '!')
+		{
+			tmp++;
+			reverse = 1;
+		}
 		if (*tmp >= 'A' && *tmp <= 'Z')
 		{
 			if (ft_fact_isexist(env, *tmp))
-				ft_changestatus_fact(env, *tmp, TRUE);
+				ft_changestatus_fact(env, *tmp, (reverse == 1) ? FALSE : TRUE);
 			else
-				ft_add_facts(env, *tmp, TRUE);
+				ft_add_facts(env, *tmp, (reverse == 1) ? FALSE : TRUE);
 		}
+		reverse = 0;
 		tmp++;
 	}
 }

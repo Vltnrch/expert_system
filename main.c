@@ -6,7 +6,7 @@
 /*   By: vroche <vroche@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/03 15:13:03 by hleber            #+#    #+#             */
-/*   Updated: 2015/06/11 17:42:38 by vroche           ###   ########.fr       */
+/*   Updated: 2015/06/11 18:11:54 by vroche           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static void	ft_init_env(t_env *env)
 	env->lfacts = NULL;
 	env->initfacts = NULL;
 	env->questions = NULL;
+	env->finish = TRUE;
 }
 
 static void parse_arg_part(t_env *env, t_expsys *exsy)
@@ -110,9 +111,16 @@ int			main(int ac, char **av)
 	ft_init_env(&env);
 	parse_arg(&env, fd);
 	ft_display_initfacts(&env);
-	ft_printf("\nQuestion : %s\n\n", env.questions);
+	ft_printf("\n\033[1;34;40mQuestion : %s\033[0m\n\n", env.questions);
 	if (close(fd) == -1)
 		ft_perror_exit("Close File:");
 	ft_backward_chaining(&env);
+	ft_printf("\n\033[1;34;40mSo %s is \033[0m", env.questions);
+	if (env.finish == FALSE)
+		ft_printf("\033[1;31;40mFalse\033[0m\n");
+	else if (env.finish == TRUE)
+		ft_printf("\033[1;32;40mTrue\033[0m\n");
+	else if (env.finish == UNDETER)
+		ft_printf("\033[1;37;41mUndeterminable\033[0m\n");
 	return (0);
 }

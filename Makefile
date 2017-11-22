@@ -30,7 +30,7 @@ OBJS = $(SRCS:.c=.o)
 
 LIB = -L libft/ -lft
 
-CFLAGS = -Wall -Wextra -Werror -I libft -g
+CFLAGS = -Wall -Wextra -Werror -I libft
 
 CC = gcc
 
@@ -38,7 +38,7 @@ RM = rm -rf
 
 $(NAME):	$(OBJS)
 			@make -C ./libft
-			@$(CC)	-o $(NAME) $(OBJS) $(CFLAGS) $(LIB)
+			@$(CC) -o $(NAME) $(OBJS) $(CFLAGS) $(LIB)
 			@clear
 			@echo "\033[1;30m  ___     ___-__________________________________________________________________________________________________________-\033[1;30m___     ___   "
 			@echo "\033[1;30m / _ \===/ _ \                                                                                                          \033[1;30m/ _ \===/ _ \  "
